@@ -23,6 +23,6 @@ def process_image(input_path, output_path):
 
 
 # Пример использования функции
-input_image_path = 'img/original/0001.jpg'  # путь к исходному изображению
+input_image_path = 'original/0001.jpg'  # путь к исходному изображению
 output_image_path = 'img/edit/output1.jpg'  # путь для сохранения обработанного изображения
 process_image(input_image_path, output_image_path)
