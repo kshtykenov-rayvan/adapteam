@@ -1,13 +1,28 @@
-from PIL import Image
-import pytesseract
+from PIL import Image, ImageEnhance
+import numpy as np
 
-# Загрузите изображение
-image = Image.open('0002.jpg',)
 
-pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
+# Функция для обработки изображения
+def process_image(input_path, output_path):
+    # Открываем изображение
+    image = Image.open(input_path)
 
-# Распознавание текста
-text = pytesseract.image_to_string(image)
+    # Увеличиваем четкость
+    enhancer = ImageEnhance.Sharpness(image)
+    image = enhancer.enhance(2.0)  # 2.0 - коэффициент увеличения четкости
 
-# Вывод результата
-print(text)
+    # Преобразуем изображение в черно-белое
+    image = image.convert("L")
+
+    # Увеличиваем контраст
+    contrast_enhancer = ImageEnhance.Contrast(image)
+    image = contrast_enhancer.enhance(1.5)  # 1.5 - коэффициент увеличения контраста
+
+    # Сохраняем обработанное изображение
+    image.save(output_path)
+
+
+# Пример использования функции
+input_image_path = '0002.jpg'  # путь к исходному изображению
+output_image_path = 'output.jpg'  # путь для сохранения обработанного изображения
+process_image(input_image_path, output_image_path)
